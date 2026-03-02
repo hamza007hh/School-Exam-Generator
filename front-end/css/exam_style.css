@@ -1,0 +1,329 @@
+/* Exam Generator Layout */
+.exam-gen-container {
+    display: flex;
+    gap: 2rem;
+    height: calc(100vh - 120px);
+    overflow: hidden;
+}
+
+.exam-controls {
+    flex: 0 0 400px;
+    /* Fixed width sidebar */
+    overflow-y: auto;
+    padding-bottom: 2rem;
+}
+
+.exam-preview-area {
+    flex: 1;
+    background: #525659;
+    /* Dark background like PDF viewers */
+    border-radius: 20px;
+    padding: 2rem;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+#exam-pages-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+
+/* A4 Paper Simulation */
+.a4-paper {
+    width: 210mm;
+    min-height: 297mm;
+    background: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    padding: 20mm;
+    position: relative;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+    /* Traditional exam font */
+    color: #000;
+}
+
+.a4-paper:not(:first-child) {
+    page-break-before: always;
+    break-before: page;
+}
+
+/* -------------------------------------
+   Traditional Exam Header Layout 
+   (Replaces modern layout for exact match)
+-------------------------------------- */
+.exam-header-traditional {
+    margin-bottom: 25px;
+    font-family: 'Times New Roman', Times, serif;
+    color: #000;
+}
+
+.header-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.header-empty {
+    flex: 1;
+}
+
+.header-logo-center {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: -5px;
+}
+
+.logo-image-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 20pt;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    line-height: 1;
+}
+
+.logo-image-placeholder .meknes-text {
+    font-size: 14pt;
+    font-weight: normal;
+    letter-spacing: 2px;
+}
+
+.header-right-text {
+    flex: 1;
+    text-align: right;
+    font-size: 10pt;
+    font-weight: bold;
+    line-height: 1.3;
+}
+
+/* The 4-column Box */
+.student-info-box {
+    display: flex;
+    border: 1px solid #000;
+    margin-bottom: 20px;
+}
+
+.info-col {
+    flex: 1;
+    border-right: 1px solid #000;
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 45px;
+}
+
+.info-col:last-child {
+    border-right: none;
+}
+
+.info-label {
+    font-size: 11pt;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.info-dots {
+    border-bottom: 2px dotted #000;
+    width: 90%;
+    margin: 0 auto;
+    height: 15px;
+    /* Space for handwritten text */
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    color: #000080;
+    /* Dark blue pen color */
+}
+
+.info-dots.handwritten {
+    font-family: 'Caveat', cursive, 'Segoe Script', italic;
+    font-size: 14pt;
+}
+
+/* Exam Title */
+.exam-title-row {
+    margin-bottom: 10px;
+}
+
+.exam-title-row h3 {
+    font-size: 11pt;
+    font-weight: bold;
+    margin: 0;
+    text-align: left;
+}
+
+/* Meta Bottom (Filiere, Duration, Year) */
+.exam-meta-bottom {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+.meta-left .filiere-label {
+    text-decoration: underline;
+}
+
+.meta-right {
+    text-align: right;
+    line-height: 1.4;
+}
+
+.meta-right .au-label {
+    text-decoration: underline;
+}
+
+/* Exam Body */
+.exam-body {
+    line-height: 1.6;
+    font-size: 12pt;
+    white-space: pre-wrap;
+    /* Preserve line breaks */
+}
+
+.exam-body h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    text-decoration: underline;
+}
+
+/* Footer */
+.exam-footer {
+    position: absolute;
+    bottom: 15mm;
+    left: 20mm;
+    right: 20mm;
+    border-top: 1px solid #000;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10pt;
+    font-style: italic;
+}
+
+/* Controls Styles */
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-light);
+    background: #F9FAFB;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    transition: all 0.3s;
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    background: white;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(164, 25, 61, 0.1);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Library & Data Management Styles */
+.lib-nav-item {
+    padding: 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: all 0.3s;
+}
+
+.lib-nav-item:hover {
+    background: var(--bg-glass);
+    color: var(--primary);
+}
+
+.lib-nav-item.active {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.data-mgmt-list {
+    list-style: none;
+    padding: 0;
+}
+
+.data-mgmt-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-light);
+    background: #fff;
+    transition: background 0.2s;
+}
+
+.data-mgmt-list li:hover {
+    background: #f8fafc;
+}
+
+/* Responsive adjustments */
+
+/* PDF Export Overrides */
+body.pdf-exporting #exam-pages-container {
+    gap: 0 !important;
+    align-items: flex-start !important;
+}
+
+body.pdf-exporting .a4-paper {
+    box-shadow: none !important;
+    margin: 0 !important;
+    border: none !important;
+    transform: none !important;
+    min-height: 296mm !important;
+    /* Slightly under 297mm to prevent 1px overflow blank pages */
+    page-break-inside: avoid;
+}
+
+body.pdf-exporting .exam-preview-area {
+    padding: 0 !important;
+    background: transparent !important;
+}
+
+@media (max-width: 1000px) {
+    .exam-gen-container {
+        flex-direction: column;
+        height: auto;
+        overflow: visible;
+    }
+
+    .exam-controls {
+        flex: none;
+        width: 100%;
+    }
+
+    .exam-preview-area {
+        height: 600px;
+    }
+
+    .a4-paper {
+        transform: scale(0.6);
+        transform-origin: top center;
+    }
+}

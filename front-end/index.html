@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUPMTI Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/exam_style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <!-- html2pdf.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+
+<body>
+    <!-- Login Overlay -->
+    <!-- Login Overlay -->
+    <div id="login-overlay" class="login-container">
+        <!-- Floating Background Shapes -->
+        <div class="circles">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <!-- Language Switcher (Login Page) -->
+        <div class="login-lang-switch">
+            <button id="login-lang-toggle" class="lang-btn">
+                <i class='bx bx-world'></i> <span id="login-lang-text">EN</span>
+            </button>
+        </div>
+
+        <div class="login-card">
+            <div class="brand"
+                style="justify-content: center; margin-bottom: 2rem; box-shadow: none; flex-direction: column; background: transparent;">
+                <h1 style="font-size: 2.5rem; font-weight: 700; color: var(--text-primary); letter-spacing: -1px;">
+                    supmti<span style="color: var(--primary);">.</span></h1>
+            </div>
+
+            <form id="login-form">
+                <div class="input-group">
+                    <input type="text" placeholder="username" data-i18n-placeholder="username_placeholder" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" placeholder="password" data-i18n-placeholder="password_placeholder" required>
+                </div>
+                <button type="submit" class="btn btn-primary"
+                    style="width: 100%; margin-top: 1rem; border-radius: 12px; height: 50px;"
+                    data-i18n="login_btn">LOGIN</button>
+
+                <div style="text-align: center; margin-top: 1.5rem;">
+                    <a href="#" style="color: var(--text-muted); font-size: 0.8rem; text-decoration: none;"
+                        data-i18n="forgot_password">FORGOT YOUR PASSWORD?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Welcome Animation Overlay -->
+    <div id="welcome-overlay" class="welcome-overlay">
+        <div class="welcome-content">
+            <div class="welcome-icon-container">
+                <i class='bx bxs-user-badge' id="welcome-icon"></i>
+            </div>
+            <h2 id="welcome-title" class="slide-up">Welcome Back,</h2>
+            <h1 id="welcome-role" class="slide-up delay-1">Administrator</h1>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Container -->
+    <div class="app-container" style="display: none; opacity: 0; transition: opacity 0.5s ease;">
+        <!-- Top Navigation -->
+        <nav class="top-nav">
+            <div class="brand" id="nav-brand">
+                <img id="brand-logo" src="" alt="Logo"
+                    style="display: none; height: 32px; object-fit: contain; margin-right: 0.5rem;">
+                <span id="brand-text">SUPMTI</span>
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item active" data-target="dashboard" data-i18n="nav_dashboard">Dashboard</li>
+                <li class="nav-item" data-target="professors" data-i18n="nav_professors">Professors</li>
+                <li class="nav-item" data-target="documents" data-i18n="nav_documents">Documents</li>
+                <li class="nav-item" data-target="exam-generator" data-i18n="nav_exam_generator">Exam Generator</li>
+                <li class="nav-item" data-target="settings" data-i18n="nav_settings">Settings</li>
+            </ul>
+            <div class="nav-actions">
+                <div class="icon-btn" id="settings-icon-btn"><i class='bx bx-cog'></i></div>
+                <div class="icon-btn" id="lang-toggle"
+                    style="font-weight: 600; font-size: 0.9rem; width: auto; padding: 0 0.5rem;">EN</div>
+                <div class="user-profile" id="profile-btn">
+                    <div class="avatar" id="nav-avatar">A</div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <header class="page-header">
+                <h1 id="page-header" data-i18n="header_dashboard">Dashboard</h1>
+            </header>
+
+            <!-- Dashboard View -->
+            <section id="dashboard" class="view-section active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon"><i class='bx bxs-file-pdf'></i></div>
+                            <span class="stat-label" data-i18n="stat_total_docs">Total Documents</span>
+                        </div>
+                        <div class="stat-value">1,248</div>
+                        <div class="stat-label" data-i18n="stat_docs_growth">+12% this month</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon"><i class='bx bxs-user-detail'></i></div>
+                            <span class="stat-label" data-i18n="stat_active_profs">Active Professors</span>
+                        </div>
+                        <div class="stat-value">42</div>
+                        <div class="stat-label" data-i18n="stat_profs_active">Currently Active</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon"><i class='bx bxs-book'></i></div>
+                            <span class="stat-label" data-i18n="stat_courses">Courses</span>
+                        </div>
+                        <div class="stat-value">18</div>
+                        <div class="stat-label" data-i18n="stat_semester">This Semester</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon"><i class='bx bxs-hdd'></i></div>
+                            <span class="stat-label" data-i18n="stat_storage">Storage Used</span>
+                        </div>
+                        <div class="stat-value">45%</div>
+                        <div class="stat-label">12GB / 25GB</div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity Table -->
+                <!-- Recent Activity Table -->
+                <h3 style="margin-bottom: 1rem; color: var(--text-secondary); font-size: 1.2rem;"
+                    data-i18n="recent_activity_title">Past Scanned Documents</h3>
+                <div class="stat-card" style="min-height: 400px; padding: 0;">
+                    <div
+                        style="padding: 1.5rem; border-bottom: 1px solid var(--border-light); display: flex; gap: 1rem; overflow-x: auto;">
+                        <select id="filter-type" class="btn btn-secondary"
+                            style="padding: 0.5rem 1rem; font-size: 0.9rem; appearance: auto;">
+                            <option value="">Type</option>
+                        </select>
+                        <select id="filter-prof" class="btn btn-secondary"
+                            style="padding: 0.5rem 1rem; font-size: 0.9rem; appearance: auto;">
+                            <option value="">Professor</option>
+                        </select>
+                        <select id="filter-date" class="btn btn-secondary"
+                            style="padding: 0.5rem 1rem; font-size: 0.9rem; appearance: auto;">
+                            <option value="">Date</option>
+                        </select>
+                        <div style="flex: 1;"></div>
+                        <div class="input-group" style="margin-bottom: 0; width: 250px;">
+                            <i class='bx bx-search'></i>
+                            <input type="text" id="search-scans" placeholder="Search"
+                                data-i18n-placeholder="search_placeholder" style="padding: 0.6rem 1rem 0.6rem 2.5rem;">
+                        </div>
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr
+                                    style="color: var(--text-secondary); text-align: left; border-bottom: 1px solid var(--border-light);">
+                                    <th style="padding: 1rem;"><input type="checkbox"></th>
+                                    <th style="padding: 1rem;" data-i18n="col_doc_name">Document Name</th>
+                                    <th style="padding: 1rem;" data-i18n="col_professor">Professor</th>
+                                    <th style="padding: 1rem;" data-i18n="col_course">Course</th>
+                                    <th style="padding: 1rem;" data-i18n="col_type">Type</th>
+                                    <th style="padding: 1rem;" data-i18n="col_scanned_by">Scanned By</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent-scans-body">
+                                <!-- Rows injected by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Professors View -->
+            <section id="professors" class="view-section">
+                <div class="section-header"
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <div>
+                        <h2 data-i18n="profs_title">Professors Directory</h2>
+                        <p style="color: var(--text-secondary);" data-i18n="profs_subtitle">Faculty members and their
+                            roles.</p>
+                    </div>
+                    <button class="btn btn-primary" id="btn-add-prof"><i class='bx bx-plus'></i> <span
+                            data-i18n="btn_add_prof">Add
+                            Professor</span></button>
+                </div>
+
+                <div class="professors-grid"
+                    style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <!-- Professor Card 1 -->
+                    <!-- Professor Cards will be injected by JS -->
+                    <!-- Other prof cards omitted for brevity but would follow same pattern -->
+                </div>
+            </section>
+
+            <section id="documents" class="view-section">
+                <div class="section-header" style="margin-bottom: 2rem;">
+                    <h2 data-i18n="docs_title">Documents Center</h2>
+                    <p style="color: var(--text-secondary);" data-i18n="docs_subtitle">Request attestations or search
+                        for exam papers.</p>
+                </div>
+
+                <!-- Static Filters Area -->
+                <div id="doc-filters-container" class="stat-card">
+                    <div class="stat-header">
+                        <h3 id="filter-title" data-i18n="filter_title">Filter Documents</h3>
+                    </div>
+
+                    <form id="doc-filter-form">
+                        <div class="grid-filters"
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+
+                            <div class="input-group" style="margin-bottom: 0;">
+                                <label
+                                    style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);">Year</label>
+                                <select id="search-year"
+                                    style="width: 100%; padding: 0.8rem; border-radius: 50px; border: 1px solid var(--border-light); background: #F9FAFB; outline: none; color: var(--text-primary);">
+                                    <option value="">All</option>
+                                    <option value="2026/2027">2026/2027</option>
+                                    <option value="2025/2026">2025/2026</option>
+                                    <option value="2024/2025">2024/2025</option>
+                                    <option value="2023/2024">2023/2024</option>
+                                    <option value="2022/2023">2022/2023</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group" style="margin-bottom: 0;">
+                                <label
+                                    style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);">Professor</label>
+                                <select id="search-prof"
+                                    style="width: 100%; padding: 0.8rem; border-radius: 50px; border: 1px solid var(--border-light); background: #F9FAFB; outline: none; color: var(--text-primary);">
+                                    <option value="">All</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group" style="margin-bottom: 0;">
+                                <label
+                                    style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);">Subject</label>
+                                <select id="search-subject"
+                                    style="width: 100%; padding: 0.8rem; border-radius: 50px; border: 1px solid var(--border-light); background: #F9FAFB; outline: none; color: var(--text-primary);">
+                                    <option value="">All</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="doc-action-btn"
+                            data-i18n="btn_search_docs">Search Documents</button>
+                    </form>
+                </div>
+
+                <!-- Results Area -->
+                <div id="doc-results" style="margin-top: 2rem;">
+                    <h3 data-i18n="results_title">Results</h3>
+                    <div id="results-container" class="stat-card"
+                        style="padding: 2rem; text-align: center; color: var(--text-secondary);">
+                        <!-- Results injected by JS -->
+                        <i class='bx bx-search' style="font-size: 3rem; margin-bottom: 1rem; display: block;"></i>
+                        <p data-i18n="results_placeholder">Apply filters to see results.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Exam Generator View -->
+            <section id="exam-generator" class="view-section">
+
+                <!-- STAGE 1: Upload -->
+                <div id="exam-upload-stage"
+                    style="height: calc(100vh - 120px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                    <div
+                        style="background: white; padding: 4rem 3rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); max-width: 600px; width: 100%;">
+                        <div
+                            style="background: var(--primary-light); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; color: var(--primary);">
+                            <i class='bx bx-cloud-upload' style="font-size: 3rem;"></i>
+                        </div>
+                        <h2 style="margin-bottom: 1rem;">Start Exam Generation</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 2rem;">Upload your exam PDF (scanned or
+                            digital) to automatically extract questions and generate a professional layout.</p>
+
+                        <input type="file" id="initial-upload-input" accept=".pdf" style="display: none;">
+                        <button class="btn btn-primary"
+                            onclick="document.getElementById('initial-upload-input').click()"
+                            style="padding: 1rem 2rem; font-size: 1.1rem; border-radius: 50px;">
+                            <i class='bx bx-upload'></i> Upload Exam PDF
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STAGE 2: Editor & Preview (Initially Hidden) -->
+                <div class="exam-gen-container" id="exam-editor-stage" style="display: none;">
+                    <!-- Left Sidebar: Controls -->
+                    <div class="exam-controls">
+                        <div class="stat-card"
+                            style="position: sticky; top: 1rem; max-height: calc(100vh - 120px); overflow-y: auto;">
+
+                            <!-- Smart Back Button -->
+                            <div style="margin-bottom: 1.5rem;">
+                                <button id="btn-return-prev" class="btn btn-secondary"
+                                    style="padding: 0.5rem 1rem; font-size: 0.9rem; background: transparent; border: 1px solid var(--border-light); color: var(--text-main); display: inline-flex; align-items: center; gap: 0.5rem;">
+                                    <i class='bx bx-arrow-back'></i> <span id="btn-return-text">Back to Upload</span>
+                                </button>
+                            </div>
+
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                                <h3 data-i18n="exam_gen_title">Exam Generator</h3>
+                                <!-- Keep refresh icon aligned but fix it in JS if needed. For now removed from header to align with bottom design -->
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 1.5rem;">
+                                <div
+                                    style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-glass); padding: 0.8rem; border-radius: 8px; border: 1px solid var(--border-light); margin-bottom: 0.5rem;">
+                                    <span
+                                        style="font-size: 0.9rem; font-weight: 500; color: var(--text-primary);">Include
+                                        Logo</span>
+                                    <label class="switch">
+                                        <input type="checkbox" id="exam-include-logo" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                                <button type="button" class="btn btn-secondary" onclick="openLogoManagementModal()"
+                                    style="width: 100%; font-size: 0.9rem; padding: 0.8rem; border-radius: 50px; background: white; color: #111827; border: 1px solid var(--border-light); font-weight: 600; display: flex; align-items: center; justify-content: flex-start; gap: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+                                    <i class='bx bx-image-add' style="font-size: 1.2rem; color: var(--primary);"></i>
+                                    Manage Custom Logos
+                                </button>
+                            </div>
+
+                            <div class="form-group">
+                                <label data-i18n="label_course">Course Name</label>
+                                <select id="exam-course" class="form-control">
+                                    <option value="" disabled selected>Select Course</option>
+                                    <!-- Populated by JS -->
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label data-i18n="label_professor">Professor</label>
+                                <select id="exam-prof" class="form-control">
+                                    <option value="" disabled selected>Select Professor</option>
+                                    <!-- Populated by JS -->
+                                </select>
+                            </div>
+
+                            <div class="row" style="display: flex; gap: 1rem;">
+                                <div class="form-group" style="flex: 1;">
+                                    <label data-i18n="label_date">Date</label>
+                                    <select id="exam-date" class="form-control">
+                                        <option value="2026/2027">2026/2027</option>
+                                        <option value="2025/2026" selected>2025/2026</option>
+                                        <option value="2024/2025">2024/2025</option>
+                                        <option value="2023/2024">2023/2024</option>
+                                        <option value="2022/2023">2022/2023</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" style="flex: 1;">
+                                    <label data-i18n="label_duration">Duration</label>
+                                    <select id="exam-duration" class="form-control">
+                                        <option value="" disabled selected>Select Duration</option>
+                                        <option value="1h">1h</option>
+                                        <option value="1h 30min">1h 30min</option>
+                                        <option value="2h">2h</option>
+                                        <option value="2h 30min">2h 30min</option>
+                                        <option value="3h">3h</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label data-i18n="label_file_name">File Name</label>
+                                <input type="text" id="exam-filename" class="form-control" placeholder="exam.pdf">
+                            </div>
+
+                            <div class="form-group">
+                                <label data-i18n="label_doc_type">Document Type</label>
+                                <select id="exam-type-select" class="form-control"
+                                    style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid var(--border-light);">
+                                    <option value="" disabled selected>Select Type</option>
+                                    <option value="Exam">Exam</option>
+                                    <option value="Final Exam">Final Exam</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label data-i18n="label_filiere">Filière</label>
+                                <select id="exam-filiere" class="form-control"
+                                    style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid var(--border-light);">
+                                    <option value="" disabled selected>Select Filière</option>
+                                    <option value="ISI">ISI</option>
+                                    <option value="MG">MG</option>
+                                </select>
+                            </div>
+
+                            <!-- Hidden but kept for logic if needed, or remove -->
+                            <label data-i18n="label_upload_pdf">Upload PDF for Extraction</label>
+                            <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                <input type="file" id="exam-upload-input" accept=".pdf" style="display: none;">
+                                <span id="upload-status"
+                                    style="font-size: 0.85rem; color: var(--text-secondary);"></span>
+                            </div>
+
+                            <div class="form-group" style="margin-top: 1.5rem;">
+                                <label data-i18n="label_questions">Questions (Paste/Edit content)</label>
+                                <textarea id="exam-content" class="form-control"
+                                    style="min-height: 200px; resize: vertical;"
+                                    placeholder="Paste generated questions here..."></textarea>
+                            </div>
+
+                            <div id="exam-save-error"
+                                style="display: none; padding: 1rem; margin-top: 1rem; background-color: rgba(239, 68, 68, 0.1); border-left: 4px solid var(--danger); border-radius: 4px; color: var(--danger); font-size: 0.9rem;">
+                                <!-- Validation messages will appear here -->
+                            </div>
+
+                            <div style="position: relative; margin-top: 1rem; display: flex; gap: 0.5rem;">
+                                <button id="btn-save-exam" class="btn btn-secondary" style="flex: 1;"
+                                    title="Save to Library">
+                                    <i class='bx bxs-save'></i> <span data-i18n="btn_save_lib">Save</span>
+                                </button>
+                                <button id="btn-download-pdf" class="btn btn-primary" style="flex: 2;">
+                                    <i class='bx bxs-download'></i> <span data-i18n="btn_download_pdf">Download
+                                        PDF</span>
+                                </button>
+                            </div>
+                        </div> <!-- End of stat-card -->
+                    </div>
+
+                    <!-- Right Area: Preview -->
+                    <div class="exam-preview-area" id="exam-preview-scroll-area">
+                        <div id="exam-pages-container">
+                            <div class="a4-paper current-page" id="exam-page-1">
+                                <!-- Traditional Exam Header -->
+                                <div class="exam-header-traditional">
+                                    <div class="header-top-row">
+                                        <div class="header-empty" id="header-logo-left-container"
+                                            style="display: flex; align-items: center; justify-content: flex-start;">
+                                            <img id="header-logo-left-img" src=""
+                                                style="display: none; max-width: 100%; max-height: 80px; object-fit: contain;">
+                                        </div>
+                                        <div class="header-logo-center" id="header-logo-center-container"
+                                            style="display: flex; align-items: center; justify-content: center;">
+                                            <div class="logo-image-placeholder" id="default-center-logo">
+                                                <span>SUP MTI</span>
+                                                <span class="meknes-text">MEKNES</span>
+                                            </div>
+                                            <img id="header-logo-center-img" src=""
+                                                style="display: none; max-width: 100%; max-height: 80px; object-fit: contain;">
+                                        </div>
+                                        <div class="header-right-text" id="header-logo-right-container"
+                                            style="display: flex; align-items: center; justify-content: flex-end;">
+                                            <div id="default-right-text" style="text-align: right;">
+                                                <div>Ecole supérieure de Management,</div>
+                                                <div>d'informatique</div>
+                                            </div>
+                                            <img id="header-logo-right-img" src=""
+                                                style="display: none; max-width: 100%; max-height: 80px; object-fit: contain;">
+                                        </div>
+                                    </div>
+
+                                    <div class="student-info-box">
+                                        <div class="info-col">
+                                            <span class="info-label">N° D'examen :</span>
+                                            <span class="info-dots" id="preview-num-exam"></span>
+                                        </div>
+                                        <div class="info-col">
+                                            <span class="info-label" data-i18n="label_note">Note :</span>
+                                            <span class="info-dots" id="preview-cne"></span>
+                                        </div>
+                                        <div class="info-col">
+                                            <span class="info-label">Nom :</span>
+                                            <span class="info-dots handwritten" id="preview-nom"></span>
+                                        </div>
+                                        <div class="info-col">
+                                            <span class="info-label">Prénom :</span>
+                                            <span class="info-dots handwritten" id="preview-prenom"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="exam-title-row">
+                                        <h3 id="preview-title">...</h3>
+                                    </div>
+
+                                    <div class="exam-meta-bottom">
+                                        <div class="meta-left">
+                                            <span class="filiere-label">Filière:</span> <span
+                                                id="preview-filiere">...</span>
+                                        </div>
+                                        <div class="meta-right">
+                                            <div>Durée : <span id="preview-duration">...</span></div>
+                                            <div class="au-label">A.U.<span id="preview-date">2025/2026</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Separator -->
+                                <hr class="exam-separator">
+
+                                <!-- Exam Body -->
+                                <div class="exam-body" id="preview-content">
+                                    <p>...</p>
+                                </div>
+
+                                <!-- Footer -->
+                                <div class="exam-footer">
+                                    <span class="footer-prof-name"></span>
+                                    <span class="page-number">Page 1/1</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Settings Section -->
+            <section id="settings" class="view-section">
+                <div class="settings-container">
+                    <div class="settings-header">
+                        <h2 data-i18n="settings_title">Settings</h2>
+                        <p style="color: var(--text-secondary);" data-i18n="settings_subtitle">Manage your preferences
+                            and account settings</p>
+                    </div>
+
+                    <div class="settings-grid">
+                        <div class="settings-card">
+                            <h3><i class='bx bx-user'></i> <span data-i18n="set_account">Account</span></h3>
+                            <div class="settings-item">
+                                <div class="setting-info">
+                                    <h4 data-i18n="set_prof_vis">Profile Visibility</h4>
+                                    <p data-i18n="set_prof_vis_desc">Make your profile visible to other students</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="settings-item">
+                                <div class="setting-info">
+                                    <h4 data-i18n="set_2fa">Two-Factor Authentication</h4>
+                                    <p data-i18n="set_2fa_desc">Add an extra layer of security</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3><i class='bx bx-palette'></i> <span data-i18n="set_appearance">Appearance</span></h3>
+                            <div class="settings-item">
+                                <div class="setting-info">
+                                    <h4 data-i18n="set_dark_mode">Dark Mode</h4>
+                                    <p data-i18n="set_dark_mode_desc">Switch between light and dark themes</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="theme-toggle">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="settings-item">
+                                <div class="setting-info">
+                                    <h4 data-i18n="set_compact">Compact View</h4>
+                                    <p data-i18n="set_compact_desc">Show more content on the screen</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3><i class='bx bx-bell'></i> <span data-i18n="set_notif">Notifications</span></h3>
+                            <div class="settings-item">
+                                <div class="setting-info">
+                                    <h4 data-i18n="set_email_notif">Email Notifications</h4>
+                                    <p data-i18n="set_email_notif_desc">Receive daily summaries</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="settings-item">
+                                <div class="setting-info">
+                                    <h4 data-i18n="set_push_notif">Push Notifications</h4>
+                                    <p data-i18n="set_push_notif_desc">Get real-time updates</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3><i class='bx bx-image'></i> <span data-i18n="set_branding">School</span></h3>
+                            <div class="settings-item">
+                                <div class="setting-info">
+                                    <h4 data-i18n="set_brand_name">School Name</h4>
+                                    <p data-i18n="set_brand_name_desc">Customize the application name</p>
+                                </div>
+                                <div class="input-group" style="margin-bottom: 0; width: 200px;">
+                                    <input type="text" id="brand-name-input" placeholder="SUPMTI"
+                                        style="padding: 0.4rem 0.8rem;">
+                                </div>
+                            </div>
+                            <div class="settings-item">
+                                <div class="setting-info">
+                                    <h4 data-i18n="set_custom_logo">Custom Logo</h4>
+                                    <p data-i18n="set_custom_logo_desc">Upload a logo to replace the text</p>
+                                </div>
+                                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                    <input type="file" id="logo-upload" accept="image/*" style="display: none;">
+                                    <button class="btn btn-secondary"
+                                        onclick="document.getElementById('logo-upload').click()"
+                                        style="padding: 0.4rem 0.8rem; font-size: 0.8rem;"
+                                        data-i18n="btn_upload">Upload</button>
+                                    <button class="btn btn-secondary" id="remove-logo-btn"
+                                        style="padding: 0.4rem 0.8rem; font-size: 0.8rem; color: var(--danger); display: none;"
+                                        data-i18n="btn_remove">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Logo Management Modal -->
+    <div id="logo-mgmt-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Manage Custom Logos</h3>
+                <button class="close-modal close-logo-modal"><i class='bx bx-x'></i></button>
+            </div>
+            <div class="modal-body">
+                <h4 style="margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);">Header Layout
+                    Options</h4>
+                <div
+                    style="display: flex; gap: 0.5rem; margin-bottom: 2rem; background: var(--bg-glass); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-light);">
+                    <div style="flex: 1;">
+                        <label
+                            style="font-size: 0.8rem; display: block; margin-bottom: 0.2rem; color: var(--text-secondary);">Left
+                            Logo</label>
+                        <select id="exam-logo-left" class="form-control"
+                            style="font-size: 0.8rem; padding: 0.5rem;"></select>
+                    </div>
+                    <div style="flex: 1;">
+                        <label
+                            style="font-size: 0.8rem; display: block; margin-bottom: 0.2rem; color: var(--text-secondary);">Center
+                            Logo</label>
+                        <select id="exam-logo-center" class="form-control"
+                            style="font-size: 0.8rem; padding: 0.5rem;"></select>
+                    </div>
+                    <div style="flex: 1;">
+                        <label
+                            style="font-size: 0.8rem; display: block; margin-bottom: 0.2rem; color: var(--text-secondary);">Right
+                            Logo</label>
+                        <select id="exam-logo-right" class="form-control"
+                            style="font-size: 0.8rem; padding: 0.5rem;"></select>
+                    </div>
+                </div>
+
+                <h4 style="margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);">Upload New Logo</h4>
+                <div class="form-group" style="display: flex; gap: 0.5rem;">
+                    <input type="text" id="new-logo-name" class="form-control"
+                        placeholder="Logo Name (e.g. University Crest)">
+                    <button class="btn btn-secondary" onclick="document.getElementById('new-logo-file').click()"
+                        style="white-space: nowrap;">
+                        <i class='bx bx-upload'></i> Choose File
+                    </button>
+                    <input type="file" id="new-logo-file" accept="image/*" style="display: none;">
+                </div>
+                <!-- Hidden canvas for resizing images if needed -->
+                <canvas id="logo-resize-canvas" style="display: none;"></canvas>
+                <div id="new-logo-preview-container"
+                    style="display: none; align-items: center; gap: 1rem; margin-bottom: 1rem; padding: 1rem; border: 1px dashed var(--border-light); border-radius: 8px;">
+                    <img id="new-logo-preview" src="" alt="Preview"
+                        style="max-height: 50px; max-width: 150px; object-fit: contain;">
+                    <span id="new-logo-filename"
+                        style="font-size: 0.8rem; color: var(--text-secondary); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"></span>
+                    <button class="btn btn-primary btn-sm" id="btn-save-new-logo">Save Logo</button>
+                </div>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);">
+                    Saved Logos</h4>
+                <ul id="saved-logos-list" class="data-mgmt-list">
+                    <!-- Populated by JS -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Professor Modal -->
+    <div id="professor-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="prof-modal-title">Add Professor</h3>
+                <button class="close-modal close-prof-modal"><i class='bx bx-x'></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="professor-form">
+                    <input type="hidden" id="prof-id">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <div class="input-group">
+                            <input type="text" id="prof-name" placeholder="Dr. Name Surname" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <div class="input-group">
+                            <input type="email" id="prof-email" placeholder="email@supmti.edu" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Role</label>
+                        <div class="input-group">
+                            <input type="text" id="prof-role" placeholder="Professor" value="Professor" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Subject (Matière)</label>
+                        <div class="input-group">
+                            <input type="text" id="prof-subject" placeholder="Enter subject name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Field of Study (Filière)</label>
+                        <div class="input-group">
+                            <input type="text" id="prof-filiere"
+                                placeholder="e.g. Ingénierie des Systèmes Informatiques" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Year</label>
+                        <div class="input-group">
+                            <input type="text" id="prof-year" placeholder="e.g. 5ème année" required>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary close-prof-modal-btn">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Professor</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Professor Profile Modal -->
+    <div id="view-prof-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Professor Profile</h3>
+                <button class="close-modal close-view-prof-modal"><i class='bx bx-x'></i></button>
+            </div>
+            <div class="modal-body">
+                <div
+                    style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 2rem;">
+                    <div class="avatar large" id="view-prof-avatar"
+                        style="width: 100px; height: 100px; font-size: 2.5rem; margin-bottom: 1rem; background: var(--primary); color: white;">
+                    </div>
+                    <h2 id="view-prof-name" style="margin-bottom: 0.5rem;"></h2>
+                    <span id="view-prof-role"
+                        style="background: #E0E7FF; color: #3730A3; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500;"></span>
+                </div>
+
+                <div
+                    style="background: var(--bg-glass); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-light);">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <i class='bx bx-envelope'
+                            style="font-size: 1.2rem; color: var(--text-secondary); margin-right: 1rem;"></i>
+                        <div>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.2rem;">Email
+                                Address</p>
+                            <p id="view-prof-email" style="font-weight: 500;"></p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <i class='bx bx-book'
+                            style="font-size: 1.2rem; color: var(--text-secondary); margin-right: 1rem;"></i>
+                        <div>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.2rem;">Subject
+                                (Matière)</p>
+                            <p id="view-prof-subject" style="font-weight: 500;"></p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <i class='bx bx-briefcase'
+                            style="font-size: 1.2rem; color: var(--text-secondary); margin-right: 1rem;"></i>
+                        <div>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.2rem;">Field of
+                                Study (Filière)</p>
+                            <p id="view-prof-filiere" style="font-weight: 500;"></p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <i class='bx bx-calendar'
+                            style="font-size: 1.2rem; color: var(--text-secondary); margin-right: 1rem;"></i>
+                        <div>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.2rem;">Year</p>
+                            <p id="view-prof-year" style="font-weight: 500;"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions" style="margin-top: 2rem;">
+                    <button type="button" class="btn btn-secondary close-view-prof-modal-btn" style="width: 100%;">Close
+                        Profile</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profile-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 data-i18n="modal_edit_profile">Edit Profile</h3>
+                <button class="close-modal"><i class='bx bx-x'></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="profile-avatar-edit">
+                    <div class="large-avatar" id="modal-avatar">A</div>
+                    <button class="btn-icon-small"><i class='bx bx-camera'></i></button>
+                </div>
+                <form id="profile-edit-form">
+                    <div class="form-group">
+                        <label data-i18n="label_fullname">Full Name</label>
+                        <div class="input-group">
+                            <i class='bx bx-user'></i>
+                            <input type="text" id="profile-name" value="Admin User" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="label_email">Email</label>
+                        <div class="input-group">
+                            <i class='bx bx-envelope'></i>
+                            <input type="email" id="profile-email" value="admin@supmti.edu" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="label_role">Role</label>
+                        <div class="input-group">
+                            <i class='bx bx-badge-check'></i>
+                            <input type="text" value="Administrator" disabled style="opacity: 0.7;">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary close-modal-btn"
+                            data-i18n="btn_cancel">Cancel</button>
+                        <button type="submit" class="btn btn-primary" data-i18n="btn_save_changes">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Toast -->
+    <div id="toast" class="toast">
+        <i class='bx bxs-check-circle'></i>
+        <span id="toast-message">Success</span>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
