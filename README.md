@@ -15,6 +15,9 @@ This platform allows:
 * Web interface for professors and administrators
 
 ---
+<img width="3831" height="1899" alt="loginpage" src="https://github.com/user-attachments/assets/1788857f-c9fd-4d15-ad1b-cfdaea331692" />
+<img width="3823" height="1896" alt="dashboard" src="https://github.com/user-attachments/assets/33d01d6a-6a57-44a0-94b2-673166240c21" />
+
 
 ## 🧠 Technologies Used
 
